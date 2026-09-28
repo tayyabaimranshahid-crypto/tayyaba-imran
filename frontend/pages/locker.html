@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Locker - Women Safety Route</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fcf4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo-text h2 {
+            font-size: 18px;
+            color: #d81b60;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #d81b60;
+            font-weight: 600;
+            border-bottom: 2px solid #d81b60;
+            padding-bottom: 4px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bell-icon {
+            font-size: 18px;
+            color: #d81b60;
+            cursor: pointer;
+        }
+
+        .profile-btn {
+            background: #d81b60;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Layout Structure */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: #fdf2f7;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #f3e1eb;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .sidebar-item.active {
+            background: #e91e63;
+            color: white;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+        }
+
+        .sidebar-item:hover:not(.active) {
+            background: #f8d7e6;
+            color: #d81b60;
+        }
+
+        .sidebar-item .icon-box {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-item:not(.active) .icon-box {
+            background: #fce4ec;
+            color: #d81b60;
+        }
+
+        .sidebar-footer-text {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 26px;
+            color: #d81b60;
+            transform: rotate(-8deg);
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 16px;
+            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .page-header h1 {
+            font-size: 20px;
+            color: #d81b60;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-header p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .storage-status {
+            background: #fdf0f6;
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: 1px solid #f8bbd0;
+            min-width: 220px;
+        }
+
+        .storage-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, #e91e63, #9c27b0);
+        }
+
+        /* Upload Area */
+        .upload-card {
+            background: #fff;
+            border: 2px dashed #f8bbd0;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-card:hover {
+            border-color: #d81b60;
+            background: #fff9fc;
+        }
+
+        .upload-icon {
+            width: 60px;
+            height: 60px;
+            background: #fce4ec;
+            color: #d81b60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 15px auto;
+        }
+
+        .upload-card h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .upload-card p {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .btn-upload {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-upload:hover {
+            background: #c2185b;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #fff;
+            border: 1px solid #f8bbd0;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: #d81b60;
+            color: white;
+            border-color: #d81b60;
+        }
+
+        /* Files Grid */
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .file-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px;
+            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 15px;
+            transition: transform 0.2s;
+        }
+
+        .file-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .file-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-type-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .icon-image { background: #ffe0b2; color: #f57c00; }
+        .icon-audio { background: #e1bee7; color: #8e24aa; }
+        .icon-video { background: #ffcdd2; color: #c62828; }
+        .icon-doc   { background: #bbdefb; color: #1976d2; }
+
+        .file-details h4 {
+            font-size: 13px;
+            color: #222;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 170px;
+        }
+
+        .file-details span {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .file-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f8f0f4;
+            padding-top: 10px;
+        }
+
+        .file-date {
+            font-size: 10px;
+            color: #aaa;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .action-btn:hover {
+            color: #d81b60;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .files-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .files-grid { grid-template-columns: 1fr; }
+            .page-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="logo-text">
+                <h2>Women Safety Route</h2>
+                <p>Empowering Her Journey, Ensuring Her Safety.</p>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="safe-places.html">Safe Places</a></li>
+            <li><a href="sos.html">Emergency</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="locker.html" class="active">Evidence Locker</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="bell-icon">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+            <div class="profile-btn">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-border-all"></i></div>
+                <span>Dashboard</span>
+            </a>
+            <a href="sos.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <span>Emergency SOS</span>
+            </a>
+            <a href="contacts.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <span>Emergency Contacts</span>
+            </a>
+            <a href="safe-places.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                <span>Safe Places</span>
+            </a>
+            <a href="locker.html" class="sidebar-item active">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <span>Evidence Locker</span>
+            </a>
+            <a href="location.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                <span>Live Location</span>
+            </a>
+            <a href="profile.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-user"></i></div>
+                <span>My Safety Profile</span>
+            </a>
+            <a href="safe-route.html" class="sidebar-item">
+                 <div class="icon-box"><i class="fa-solid fa-route"></i></div>
+                 <span>Safe-route</span>
+            </a>
+            <div class="sidebar-footer-text">
+                You are<br>Not Alone ♡
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1><i class="fa-solid fa-vault"></i> Secure Evidence Locker</h1>
+                    <p>Encrypted vault to store photos, videos, audio recordings, and police reports safely.</p>
+                </div>
+                <div class="storage-status">
+                    <div class="storage-info">
+                        <span>Encrypted Storage</span>
+                        <span id="storageText">1.75 GB / 5 GB</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 35%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Box -->
+            <div class="upload-card" id="dropZone">
+                <div class="upload-icon">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <h3>Upload Secure Evidence</h3>
+                <p>Drag & drop images, videos, audio clips, or PDF documents here</p>
+                <input type="file" id="fileInput" multiple hidden>
+                <button class="btn-upload" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-section">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-filter="all">All Files</button>
+                    <button class="tab-btn" data-filter="image">Images</button>
+                    <button class="tab-btn" data-filter="video">Videos</button>
+                    <button class="tab-btn" data-filter="audio">Audio Clips</button>
+                    <button class="tab-btn" data-filter="document">Documents</button>
+                </div>
+            </div>
+
+            <!-- Locked Files Grid -->
+            <div class="files-grid" id="filesGrid">
+                
+                <!-- File Item 1: Image -->
+                <div class="file-card" data-category="image">
+                    <div class="file-header">
+                        <div class="file-type-icon icon-image">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Incident_Photo_01.jpg</h4>
+                            <span>2.4 MB</span>
+                        </div>
+                    </div>
+                    <div class="file-footer">
+                        <span class="file-date"><i class="fa-regular fa-clock"></i> Sep 08, 2026</span>
+                        <div class="file-actions">
+                            <button class="action-btn" title="Download" onclick="alert('Downloading Incident_Photo_01.jpg')"><i class="fa-solid fa-download"></i></button>
+                            <button class="action-btn" title="Delete" onclick="deleteCard(this)"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Item 2: Audio -->
+                <div class="file-card" data-category="audio">
+                    <div class="file-header">
+                        <div class="file-type-icon icon-audio">
+                            <i class="fa-solid fa-microphone"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Voice_Recording_SOS.mp3</h4>
+                            <span>5.1 MB</span>
+                        </div>
+                    </div>
+                    <div class="file-footer">
+                        <span class="file-date"><i class="fa-regular fa-clock"></i> Sep 05, 2026</span>
+                        <div class="file-actions">
+                            <button class="action-btn" title="Download" onclick="alert('Downloading Voice_Recording_SOS.mp3')"><i class="fa-solid fa-download"></i></button>
+                            <button class="action-btn" title="Delete" onclick="deleteCard(this)"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Item 3: Document/Police Report -->
+                <div class="file-card" data-category="document">
+                    <div class="file-header">
+                        <div class="file-type-icon icon-doc">
+                            <i class="fa-regular fa-file-pdf"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>Police_Report_Copy.pdf</h4>
+                            <span>1.2 MB</span>
+                        </div>
+                    </div>
+                    <div class="file-footer">
+                        <span class="file-date"><i class="fa-regular fa-clock"></i> Aug 29, 2026</span>
+                        <div class="file-actions">
+                            <button class="action-btn" title="Download" onclick="alert('Downloading Police_Report_Copy.pdf')"><i class="fa-solid fa-download"></i></button>
+                            <button class="action-btn" title="Delete" onclick="deleteCard(this)"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JavaScript for Dynamic Functionality -->
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const filesGrid = document.getElementById('filesGrid');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+
+        // Handle File Selection via Browse
+        fileInput.addEventListener('change', function(e) {
+            handleFiles(e.target.files);
+        });
+
+        // Handle Drag and Drop
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#d81b60';
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = '#f8bbd0';
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#f8bbd0';
+            handleFiles(e.dataTransfer.files);
+        });
+
+        // Process Uploaded Files
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                let category = 'document';
+                let iconClass = 'icon-doc';
+                let iconSymbol = 'fa-regular fa-file-pdf';
+
+                if (file.type.startsWith('image/')) {
+                    category = 'image';
+                    iconClass = 'icon-image';
+                    iconSymbol = 'fa-regular fa-image';
+                } else if (file.type.startsWith('video/')) {
+                    category = 'video';
+                    iconClass = 'icon-video';
+                    iconSymbol = 'fa-solid fa-video';
+                } else if (file.type.startsWith('audio/')) {
+                    category = 'audio';
+                    iconClass = 'icon-audio';
+                    iconSymbol = 'fa-solid fa-microphone';
+                }
+
+                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+                const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+
+                // Create Card HTML
+                const card = document.createElement('div');
+                card.className = 'file-card';
+                card.setAttribute('data-category', category);
+                card.innerHTML = `
+                    <div class="file-header">
+                        <div class="file-type-icon ${iconClass}">
+                            <i class="${iconSymbol}"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <span>${fileSizeMB}</span>
+                        </div>
+                    </div>
+                    <div class="file-footer">
+                        <span class="file-date"><i class="fa-regular fa-clock"></i> ${currentDate}</span>
+                        <div class="file-actions">
+                            <button class="action-btn" title="Download" onclick="alert('Downloading ${file.name}')"><i class="fa-solid fa-download"></i></button>
+                            <button class="action-btn" title="Delete" onclick="deleteCard(this)"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                `;
+                filesGrid.prepend(card);
+            });
+        }
+
+        // Delete File Card
+        function deleteCard(button) {
+            const card = button.closest('.file-card');
+            card.remove();
+        }
+
+        // Filter Tabs Functionality
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+                const cards = filesGrid.querySelectorAll('.file-card');
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Women Safety Route</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration: none !important; border-bottom: none !important; box-shadow: none !important;">
+            <img src="../images/logo.png" alt="Women Safety Route" class="logo-icon">
+            <span style="text-decoration: none !important;">Women Safety Route</span>
+        </a>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="#features">Features</a>
+<li><a href="index.html#about-us">About Us</a></li>
+        <button class="login-btn" onclick="openLogin()">Login</button>
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="small-heading">
+                 WOMEN SAFETY ROUTE
+            </div>
+
+            <h1>
+                Your Safety.<br>
+                Your Route.<br>
+                <span>Your Choice.</span>
+            </h1>
+
+            <p class="hero-text">
+                Find safer routes, access emergency support,
+                and stay connected when you need help.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="emergency-btn" onclick="openLogin()">
+                    🛡️ Emergency Help
+                </button>
+                <button class="route-btn" onclick="openLogin()">
+                    🔍 Find Safe Route
+                </button>
+            </div>
+        </div>
+
+       <!-- HERO ILLUSTRATION SPACE -->
+<div class="hero-image">
+    <img src="../images/hero-girl.png" alt="Hero Girl Graphic" style="width: 600px; height: auto;">
+        </div>
+    </section>
+
+
+
+    <!-- ================= FEATURE CARDS SECTION ================= -->
+    <section id="features" style="padding: 60px 20px; text-align: center; background-color: #faf6fa; clear: both;">
+        <h2 style="font-size: 28px; color: #8e4585; margin-bottom: 10px; font-weight: 700;">Our Features</h2>
+        <p style="color: #666; margin-bottom: 40px; font-size: 15px;">Explore our safety features. Click any card to log in and get started.</p>
+        
+        <!-- Original 4 Dashboard Cards made clickable -->
+        <div class="features" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 0 auto; background: transparent; padding: 0;">
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon purple" style="font-size: 24px;">🔍</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">Safe Routes</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Discover the safest routes based on safety information.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon pink" style="font-size: 24px;">📞</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">Emergency SOS</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Get immediate help in emergencies with one tap.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon purple" style="font-size: 24px;">📍</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">Share Location</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Share your live location with trusted contacts.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon warning" style="font-size: 24px;">⚠️</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">Report Issues</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Report unsafe areas and help make your community safer.</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <!-- Features Section (Replacing the Blue Statistics Bar) -->
+<div class="features" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 0 auto; background: transparent; padding: 0;">
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon purple" style="font-size: 24px;">🔍</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">Evidence Locker</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">securely store media files,incident logs and importantsafety reports with privacy protection.</p> 
+                </div>
+            </a>
+<a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon purple" style="font-size: 24px;">📍</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">emergency contacts</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Manage and quickly notify your trusted family members or friends instantly during urgent situations.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" onclick="openLogin(); return false;" style="text-decoration: none; color: inherit; width: 250px;">
+                <div class="feature-card" style="margin: 0; width: 100%; box-sizing: border-box; height: 100%; background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: flex-start; gap: 15px;">
+                    <div class="feature-icon warning" style="font-size: 24px;">⚠️</div>
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 5px; color: #333;">My profile</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.4;">Update your personal information, emergency settings, and security preferences easily.</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        
+    <!-- About Us Section -->
+<section id="about-us" class="about-section">
+    <div class="about-container">
+        <div class="about-header">
+            <h2>About Our Mission</h2>
+            <p class="subtitle">Empowering safer journeys and rapid assistance when it matters most.</p>
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-icon">🛡️</div>
+                <h3>Smart Route Guidance</h3>
+                <p>We help users navigate unfamiliar areas by identifying secure pathways, well-lit streets, and trusted community checkpoints in real-time.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="about-icon">🚨</div>
+                <h3>Instant SOS & Support</h3>
+                <p>Equipped with a quick-response emergency trigger that connects you immediately to predefined contacts and emergency services.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="about-icon">🔒</div>
+                <h3>Secure Evidence Locker</h3>
+                <p>A reliable space to securely store logs, incident reports, and media evidence, ensuring your privacy and data protection are prioritized.</p>
+            </div>
+        </div>
+
+        <div class="about-footer-text">
+            <p>Our platform is designed to give you peace of mind, combining technology and community support to foster a safer environment for everyone.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-logo">Women Safety Route</div>
+        <p>Safer Paths. Stronger Women.</p>
+        <br>
+        <p>© 2026 Women Safety Route. All Rights Reserved.</p>
+
+        <!-- ================= LOGIN MODAL ================= -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content login-box">
+                <button class="close-btn" onclick="closeLogin()">&times;</button>
+                <div class="modal-icon">🛡️</div>
+                <h2>Welcome Back</h2>
+                <p>Login to Women Safety Route</p>
+
+                <form onsubmit="loginUser(event)">
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="login-submit">Login</button>
+                </form>
+
+                <p class="register-text">
+                    Don't have an account?
+                    <a href="#" onclick="openRegister(); return false;">Create Account</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ================= REGISTRATION MODAL ================= -->
+        <div class="modal" id="registerModal">
+            <div class="modal-content login-box">
+                <button class="close-btn" onclick="closeRegister()">&times;</button>
+                <h2>Create Account</h2>
+                <p> Women Safety Route</p>
+
+                <form onsubmit="registerUser(event)">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="registerName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="registerPhone" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="registerPassword" placeholder="Create a password" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+
+                    <button type="submit" class="login-submit">Create Account</button>
+                </form>
+
+                <p class="register-text">
+                    Already have an account?
+                    <a href="#" onclick="backToLogin(); return false;">Login</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="../js/script.js"></script>
+    <script>
+        function openLogin() {
+            document.getElementById("loginModal").classList.add("show");
+        }
+
+        function closeLogin() {
+            document.getElementById("loginModal").classList.remove("show");
+        }
+
+        function openRegister() {
+            closeLogin();
+            document.getElementById("registerModal").classList.add("show");
+        }
+
+        function closeRegister() {
+            document.getElementById("registerModal").classList.remove("show");
+        }
+
+        function backToLogin() {
+            closeRegister();
+            openLogin();
+        }
+
+        function loginUser(event) {
+            event.preventDefault();
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (email && password) {
+                alert("Login successful!");
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Please enter email and password.");
+            }
+        }
+
+        function registerUser(event) {
+            event.preventDefault();
+            const pass = document.getElementById("registerPassword").value;
+            const confirmPass = document.getElementById("confirmPassword").value;
+
+            if (pass !== confirmPass) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            alert("Account created successfully! Please login.");
+            backToLogin();
+        }
+        
+    </script>
+
+</body>
+
+</html>

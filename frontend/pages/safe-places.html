@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Places - Women Safety Route</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS (Zaroori hai map ke design aur tiles ke liye) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #fcf4f8; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        .navbar { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 12px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); position: sticky; top: 0; z-index: 100; }
+        .logo-section { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, #e91e63, #9c27b0); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+        .logo-text h2 { font-size: 18px; color: #d81b60; font-weight: 700; line-height: 1.2; }
+        .logo-text p { font-size: 11px; color: #888; }
+        .nav-links { display: flex; align-items: center; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: #d81b60; font-weight: 600; border-bottom: 2px solid #d81b60; padding-bottom: 4px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .bell-icon { font-size: 18px; color: #d81b60; cursor: pointer; }
+        .profile-btn { background: #d81b60; color: white; padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+        
+        .container { display: flex; flex: 1; }
+        .sidebar { width: 250px; background-color: #fdf2f7; padding: 20px 15px; display: flex; flex-direction: column; gap: 10px; border-right: 1px solid #f3e1eb; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 12px 18px; border-radius: 10px; text-decoration: none; color: #555; font-size: 13px; font-weight: 500; transition: all 0.3s; }
+        .sidebar-item.active { background: #e91e63; color: white; box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3); }
+        .sidebar-item:hover:not(.active) { background: #f8d7e6; color: #d81b60; }
+        .sidebar-item .icon-box { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; }
+        .sidebar-item:not(.active) .icon-box { background: #fce4ec; color: #d81b60; }
+        .sidebar-footer-text { margin-top: auto; padding: 20px; text-align: center; font-family: 'Caveat', cursive; font-size: 26px; color: #d81b60; transform: rotate(-8deg); }
+
+        .content { flex: 1; padding: 25px 35px; display: flex; flex-direction: column; gap: 20px; }
+        .page-header { background: #fff; padding: 20px 25px; border-radius: 16px; border: 1px solid #fce4ec; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .page-header h1 { font-size: 20px; color: #d81b60; display: flex; align-items: center; gap: 10px; }
+
+        /* Grid layout for list and map */
+        .places-layout { display: grid; grid-template-columns: 380px 1fr; gap: 20px; flex: 1; }
+        .places-list { display: flex; flex-direction: column; gap: 15px; max-height: 520px; overflow-y: auto; }
+        .place-card { background: #fff; border-radius: 14px; padding: 15px 18px; border: 1px solid #fce4ec; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
+        .place-card:hover { background: #fdf2f7; }
+        .place-left { display: flex; align-items: center; gap: 15px; }
+        .place-icon { width: 42px; height: 42px; border-radius: 12px; background: #fce4ec; color: #d81b60; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .place-info h3 { font-size: 14px; color: #333; }
+        .place-info p { font-size: 11px; color: #777; margin-top: 2px; }
+        .place-info span { font-size: 10px; color: #d81b60; font-weight: 600; background: #fce4ec; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+        
+        /* Map Box Styling */
+        .map-box { background: #fff; border-radius: 16px; border: 1px solid #fce4ec; overflow: hidden; min-height: 500px; position: relative; }
+        #map { width: 100%; height: 100%; min-height: 500px; z-index: 1; }
+
+        @media (max-width: 900px) { 
+            .container { flex-direction: column; } 
+            .sidebar { width: 100%; } 
+            .places-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="logo-text"><h2>Women Safety Route</h2><p>Empowering Her Journey, Ensuring Her Safety.</p></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="safe-places.html" class="active">Safe Places</a></li>
+            <li><a href="sos.html">Emergency</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="locker.html">Evidence Locker</a></li>
+           
+        </ul>
+        <div class="nav-right">
+            <div class="bell-icon"><i class="fa-regular fa-bell"></i></div>
+            <div class="profile-btn"><i class="fa-solid fa-user"></i><span>My Profile</span></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-border-all"></i></div>
+                <span>Dashboard</span></a>
+            <a href="sos.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <span>Emergency SOS</span></a>
+            <a href="contacts.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <span>Emergency Contacts</span></a>
+            <a href="safe-places.html" class="sidebar-item active">
+                <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                <span>Safe Places</span></a>
+            <a href="locker.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <span>Evidence Locker</span></a>
+            <a href="location.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div><span>Live Location</span></a>
+            <a href="profile.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-user"></i></div><span>My Safety Profile</span></a>
+            <a href="about.html" class="text-slate-600 hover:text-rose-600 font-medium transition">About Us</a>
+            <div class="sidebar-footer-text">You are<br>Not Alone ♡</div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <h1><i class="fa-solid fa-shield-halved"></i> Nearby Safe Places</h1>
+                <p style="font-size: 12px; color: #666; margin-top: 4px;">Verified safe locations in Sialkot including police stations, hospitals, and help centers.</p>
+            </div>
+
+            <!-- Main Layout with List and Map -->
+            <div class="places-layout">
+                <div class="places-list" id="placesList">
+                    <!-- Dynamic cards will load here -->
+                </div>
+                <div class="map-box">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Sialkot Safe Places Data (Police Stations, Hospitals, Women Help Centers)
+        const safePlaces = [
+            { name: "Women Police Station Sialkot", type: "Police Station", lat: 32.4975, lng: 74.5365, address: "Paris Road, Sialkot", phone: "052-9250123" },
+            { name: "Allama Iqbal Memorial Teaching Hospital", type: "Hospital", lat: 32.5020, lng: 74.5320, address: "Kashmir Road, Sialkot", phone: "052-9250040" },
+            { name: "Sialkot Cantt General Hospital", type: "Hospital", lat: 32.5090, lng: 74.5340, address: "Cantt, Sialkot", phone: "052-9260111" },
+            { name: "District Police Headquarters Sialkot", type: "Police Station", lat: 32.4950, lng: 74.5290, address: "Court Road, Sialkot", phone: "052-9250100" },
+            { name: "Sialkot Women Shelter Home (Dar-ul-Aman)", type: "Shelter Center", lat: 32.4890, lng: 74.5250, address: "Model Town, Sialkot", phone: "052-4567890" }
+        ];
+
+        let map;
+        let markers = [];
+
+        function initSafePlacesMap() {
+            if (map) {
+                map.remove();
+            }
+
+            // Initialize map centered on Sialkot
+            map = L.map('map').setView([32.4945, 74.5229], 14);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            renderPlaces();
+
+            // Leaflet map size fix when opened directly
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 200);
+        }
+
+        // Render places in sidebar list and add pins to map
+        function renderPlaces() {
+            let listContainer = document.getElementById('placesList');
+            listContainer.innerHTML = "";
+            markers = []; 
+
+            safePlaces.forEach((place, index) => {
+                let card = document.createElement('div');
+                card.className = 'place-card';
+                card.innerHTML = `
+                    <div class="place-left">
+                        <div class="place-icon"><i class="fa-solid fa-building-shield"></i></div>
+                        <div class="place-info">
+                            <h3>${place.name}</h3>
+                            <p>${place.address} • ${place.phone}</p>
+                            <span>${place.type}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Click card to focus map on that place
+                card.onclick = () => {
+                    map.setView([place.lat, place.lng], 16);
+                    markers[index].openPopup();
+                };
+
+                listContainer.appendChild(card);
+
+                // Add Marker on Map
+                let marker = L.marker([place.lat, place.lng]).addTo(map);
+                marker.bindPopup(`<b>${place.name}</b><br>${place.address}<br>Phone: ${place.phone}`);
+                markers.push(marker);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initSafePlacesMap();
+        });
+        
+        window.onload = function() {
+            if (map) {
+                map.invalidateSize();
+            }
+        };
+    </script>
+</body>
+</html>

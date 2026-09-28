@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Safety Profile - Women Safety Route</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcf6f9;
+            color: #333;
+            display: flex;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 240px;
+            background: #ffffff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px 15px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-logo h2 {
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+
+        .sidebar-logo span {
+            font-size: 0.7rem;
+            color: #8e4585;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            text-decoration: none;
+            color: #555;
+            font-size: 0.88rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-menu li a:hover, .nav-menu li a.active {
+            background-color: #fdf2f8;
+            color: #8e4585;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            font-size: 0.75rem;
+            color: #8e4585;
+            text-align: center;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* Main Content Wrapper */
+        .main-content {
+            margin-left: 240px;
+            flex-grow: 1;
+            padding: 25px 35px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .top-bar span {
+            font-weight: 600;
+        }
+
+        .top-icon {
+            background: white;
+            padding: 8px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        /* Profile Banner */
+        .profile-banner {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .banner-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fdf2f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            overflow: hidden;
+            border: 2px solid #8e4585;
+        }
+
+        .banner-info h1 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .banner-info p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .edit-btn {
+            background: #8e4585;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Dashboard Grid Layout (2 Columns) */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 25px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Cards Styling */
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            color: #8e4585;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-link {
+            font-size: 0.8rem;
+            color: #8e4585;
+            text-decoration: none;
+            font-weight: 600;
+            background: #fdf2f8;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Info Rows */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .info-label {
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-value {
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        /* Quick Action & Tip Items */
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f8fafc;
+            font-size: 0.85rem;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-icon {
+            width: 32px;
+            height: 32px;
+            background: #fdf2f8;
+            color: #8e4585;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .item-text h4 {
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+
+        .item-text p {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .badge-status {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        /* Footer Quote */
+        .page-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            color: #8e4585;
+            font-size: 0.85rem;
+            border-top: 1px dashed #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-logo">
+                <img src="images/logo.png" alt="Logo">
+                <h2>Women Safety Route</h2>
+                <span>EMPOWERING SAFETY</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="safety-profile.html" class="active">👤 My Safety Profile</a></li>
+                <li><a href="safe-route.html">🗺️ Safe Route</a></li>
+                <li><a href="emergency.html">🚨 Emergency SOS</a></li>
+                <li><a href="contacts.html">📞 Emergency Contacts</a></li>
+                <li><a href="locker.html">📁 Evidence Locker</a></li>
+                <li><a href="about.html">ℹ️ About Us</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <p>Safe Steps<br>Brighter Future</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <span>Hello, Areeba</span>
+            <div class="top-icon">👤</div>
+            <div class="top-icon">🔔</div>
+        </div>
+
+        <!-- Profile Header Banner -->
+        <div class="profile-banner">
+            <div class="banner-left">
+                <div class="banner-avatar">👩</div>
+                <div class="banner-info">
+                    <h1>My Safety Profile</h1>
+                    <p>Your personal information, emergency contacts and important details — all in one place.</p>
+                </div>
+            </div>
+            <button class="edit-btn">✏️ Edit Profile</button>
+        </div>
+
+        <!-- Dashboard Layout Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Left Column -->
+            <div class="column">
+                
+                <!-- Personal Information Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>👤 Personal Information</h3>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">👤 Full Name</span>
+                        <span class="info-value">Areeba Malik</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">✉️ Email Address</span>
+                        <span class="info-value">areeba.malik@gmail.com</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">📞 Phone Number</span>
+                        <span class="info-value">+92 312 3456789</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">📅 Date of Birth</span>
+                        <span class="info-value">12 March 2004</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">⚧ Gender</span>
+                        <span class="info-value">Female</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">🩸 Blood Group</span>
+                        <span class="info-value">B+</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">📍 Address</span>
+                        <span class="info-value">House # 123, Street 5, DHA, Islamabad</span>
+                    </div>
+                </div>
+
+                <!-- Emergency Contacts Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🚨 Emergency Contacts</h3>
+                        <a href="#" class="action-link">+ Add Contact</a>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-left">
+                            <div class="item-icon">👩</div>
+                            <div class="item-text">
+                                <h4>Mom</h4>
+                                <p>+92 300 1234567 • Mother</p>
+                            </div>
+                        </div>
+                        <span>📞 ✉️</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-left">
+                            <div class="item-icon">👤</div>
+                            <div class="item-text">
+                                <h4>Best Friend</h4>
+                                <p>+92 333 9876543 • Friend</p>
+                            </div>
+                        </div>
+                        <span>📞 ✉️</span>
+                    </div>
+                </div>
+
+                <!-- Additional Information Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📋 Additional Information</h3>
+                    </div>
+                    <div class="info-row"><span class="info-label">Allergies</span><span class="info-value">None</span></div>
+                    <div class="info-row"><span class="info-label">Medical Conditions</span><span class="info-value">None</span></div>
+                    <div class="info-row"><span class="info-label">Current Medications</span><span class="info-value">None</span></div>
+                    <div class="info-row"><span class="info-label">Special Notes</span><span class="info-value">N/A</span></div>
+                </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="column">
+                
+                <!-- Quick Actions Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>⚡ Quick Actions</h3>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-left">
+                            <div class="item-icon">📍</div>
+                            <div class="item-text">
+                                <h4>Share Live Location</h4>
+                                <p>Let trusted people know your location</p>
+                            </div>
+                        </div>
+                        <span>›</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-left">
+                            <div class="item-icon">🚨</div>
+                            <div class="item-text">
+                                <h4>Emergency SOS</h4>
+                                <p>Send alert to your contacts</p>
+                            </div>
+                        </div>
+                        <span>›</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-left">
+                            <div class="item-icon">🗺️</div>
+                            <div class="item-text">
+                                <h4>Find Safe Route</h4>
+                                <p>Get safest route to your destination</p>
+                            </div>
+                        </div>
+                        <span>›</span>
+                    </div>
+                </div>
+
+                <!-- Location & Security Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📍 Location & Security</h3>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-text">
+                            <h4>Location Sharing</h4>
+                            <p>Your live location is shared with trusted contacts.</p>
+                        </div>
+                        <span class="badge-status">ON</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-text">
+                            <h4>Last Updated</h4>
+                            <p>Today, 10:24 AM</p>
+                        </div>
+                        <span>›</span>
+                    </div>
+                </div>
+
+                <!-- Safety Tips Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🛡️ Safety Tips</h3>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-text">
+                            <h4>Before leaving home</h4>
+                            <p>Turn on your location, check weather and plan your route.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-text">
+                            <h4>Time Management</h4>
+                            <p>Avoid late night travel, keep track of time and reach destination safely.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-text">
+                            <h4>Stay in touch</h4>
+                            <p>Keep your family informed about your location and plans.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Footer Tagline -->
+        <div class="page-footer">
+            <p>♥ Your Safety Matters — Be Aware • Be Prepared • Be Safe</p>
+        </div>
+
+    </main>
+
+</body>
+</html>

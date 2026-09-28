@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency SOS - Women Safety Route</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fcf4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo-text h2 {
+            font-size: 18px;
+            color: #d81b60;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #d81b60;
+            font-weight: 600;
+            border-bottom: 2px solid #d81b60;
+            padding-bottom: 4px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bell-icon {
+            font-size: 18px;
+            color: #d81b60;
+            cursor: pointer;
+        }
+
+        .profile-btn {
+            background: #d81b60;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Layout Structure */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: #fdf2f7;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #f3e1eb;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .sidebar-item.active {
+            background: #e91e63;
+            color: white;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+        }
+
+        .sidebar-item:hover:not(.active) {
+            background: #f8d7e6;
+            color: #d81b60;
+        }
+
+        .sidebar-item .icon-box {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-item:not(.active) .icon-box {
+            background: #fce4ec;
+            color: #d81b60;
+        }
+
+        .sidebar-footer-text {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 26px;
+            color: #d81b60;
+            transform: rotate(-8deg);
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 16px;
+            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .page-header h1 {
+            font-size: 20px;
+            color: #d81b60;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-header p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        /* Grid Layout */
+        .sos-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+        }
+
+        /* SOS Main Action Box */
+        .sos-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .sos-btn-outer {
+            width: 180px;
+            height: 180px;
+            background: rgba(233, 30, 99, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            animation: pulse-ring 2s infinite;
+        }
+
+        .sos-btn-inner {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #ff1744, #d50000);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 25px rgba(213, 0, 0, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .sos-btn-inner:active {
+            transform: scale(0.95);
+        }
+
+        .sos-btn-inner span {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sos-btn-inner small {
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.4); }
+            70% { box-shadow: 0 0 0 25px rgba(233, 30, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+        }
+
+        .sos-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            max-width: 320px;
+        }
+
+        .btn-cancel {
+            background: #f5f5f5;
+            color: #666;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Hotlines Panel */
+        .hotlines-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hotlines-card h3 {
+            font-size: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hotline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fdf0f6;
+            border-radius: 12px;
+            border: 1px solid #f8bbd0;
+        }
+
+        .hotline-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hotline-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #d81b60;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .hotline-info h4 {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .hotline-info p {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .btn-call-mini {
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sos-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="logo-text">
+                <h2>Women Safety Route</h2>
+                <p>Empowering Her Journey, Ensuring Her Safety.</p>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="safe-places.html">Safe Places</a></li>
+            <li><a href="sos.html" class="active">Emergency</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="locker.html">Evidence Locker</a></li>
+
+        </ul>
+
+        <div class="nav-right">
+            <div class="bell-icon">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+            <div class="profile-btn">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-border-all"></i></div>
+                <span>Dashboard</span>
+            </a>
+            <a href="sos.html" class="sidebar-item active">
+                <div class="icon-box"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <span>Emergency SOS</span>
+            </a>
+            <a href="contacts.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <span>Contacts</span>
+            </a>
+            <a href="safe-places.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                <span>Safe Places</span>
+            </a>
+            <a href="locker.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <span>Evidence Locker</span>
+            </a>
+            <a href="location.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                <span>Live Location</span>
+            </a>
+            <a href="profile.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-user"></i></div>
+                <span>My Safety Profile</span>
+            </a>
+            <a href="safe-route.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-route"></i></div>
+                <span>Safe-route</span>
+    </a>
+            <div class="sidebar-footer-text">
+                You are<br>Not Alone ♡
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1><i class="fa-solid fa-triangle-exclamation"></i> Instant Emergency SOS</h1>
+                <p>Pressing the button will immediately broadcast your live location and alert all your emergency contacts.</p>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="sos-grid">
+                
+                <!-- SOS Trigger Card -->
+                <div class="sos-card">
+                    <h2 style="font-size: 18px; color: #333;">Need Urgent Help?</h2>
+                    <p class="sos-desc">Press the SOS button below. A 5-second countdown will start before sending emergency alerts.</p>
+                    
+                    <div class="sos-btn-outer">
+                        <button class="sos-btn-inner" onclick="triggerSOS()">
+                            <span>SOS</span>
+                            <small>Tap for Help</small>
+                        </button>
+                    </div>
+
+                    <button class="btn-cancel" id="cancelBtn" onclick="cancelSOS()">Cancel Emergency</button>
+                </div>
+
+                <!-- Quick Emergency Hotlines -->
+                <div class="hotlines-card">
+                    <h3><i class="fa-solid fa-phone-volume" style="color: #d81b60;"></i> Direct Emergency Hotlines</h3>
+                    
+                    <div class="hotline-item">
+                        <div class="hotline-left">
+                            <div class="hotline-icon"><i class="fa-solid fa-shield"></i></div>
+                            <div class="hotline-info">
+                                <h4>Police Helpline</h4>
+                                <p>15</p>
+                            </div>
+                        </div>
+                        <a href="tel:15" class="btn-call-mini"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+
+                    <div class="hotline-item">
+                        <div class="hotline-left">
+                            <div class="hotline-icon"><i class="fa-solid fa-truck-medical"></i></div>
+                            <div class="hotline-info">
+                                <h4>Ambulance Service</h4>
+                                <p>1122</p>
+                            </div>
+                        </div>
+                        <a href="tel:1122" class="btn-call-mini"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+
+                    <div class="hotline-item">
+                        <div class="hotline-left">
+                            <div class="hotline-icon"><i class="fa-solid fa-person-breastfeeding"></i></div>
+                            <div class="hotline-info">
+                                <h4>Women Safety Helpline</h4>
+                                <p>1043</p>
+                            </div>
+                        </div>
+                        <a href="tel:1043" class="btn-call-mini"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        let countdownTimer;
+        let countdownSeconds = 5;
+
+        function triggerSOS() {
+            let cancelBtn = document.getElementById('cancelBtn');
+            let descText = document.querySelector('.sos-desc');
+            let innerBtn = document.querySelector('.sos-btn-inner');
+            
+            // UI update karo
+            cancelBtn.style.display = 'block';
+            innerBtn.style.background = 'linear-gradient(135deg, #ff9800, #f57c00)'; // Orange warning color during countdown
+            
+            countdownSeconds = 5;
+            descText.innerHTML = `🚨 Sending alert in <b id="timer-count">${countdownSeconds}</b> seconds...`;
+
+            // Countdown timer start karo
+            countdownTimer = setInterval(() => {
+                countdownSeconds--;
+                document.getElementById('timer-count').innerText = countdownSeconds;
+
+                if (countdownSeconds <= 0) {
+                    clearInterval(countdownTimer);
+                    sendEmergencyAlertNow();
+                }
+            }, 1000);
+        }
+
+        function cancelSOS() {
+            // Timer roko
+            clearInterval(countdownTimer);
+            
+            let cancelBtn = document.getElementById('cancelBtn');
+            let descText = document.querySelector('.sos-desc');
+            let innerBtn = document.querySelector('.sos-btn-inner');
+            
+            // UI reset karo
+            cancelBtn.style.display = 'none';
+            innerBtn.style.background = 'linear-gradient(135deg, #ff1744, #d50000)';
+            descText.innerHTML = "Press the SOS button below. A 5-second countdown will start before sending emergency alerts.";
+            
+            alert("Emergency Alert Cancelled.");
+        }
+
+        function sendEmergencyData(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const googleMapsUrl = `https://maps.google.com/?q=${latitude},${longitude}`;
+
+            let descText = document.querySelector('.sos-desc');
+            let innerBtn = document.querySelector('.sos-btn-inner');
+            let cancelBtn = document.getElementById('cancelBtn');
+
+            // UI reset state
+            cancelBtn.style.display = 'none';
+            innerBtn.style.background = 'linear-gradient(135deg, #ff1744, #d50000)';
+            descText.innerHTML = "Alert sent successfully! Live location broadcasted.";
+
+            // Success message with location link
+            alert(`🚨 EMERGENCY ALERT SENT!\n\nYour Live Location:\nLat: ${latitude}, Lng: ${longitude}\n\nGoogle Maps Link:\n${googleMapsUrl}`);
+
+            // Yahan aap apna backend API call add kar sakte hain (e.g. Fetch API)
+            /*
+            fetch('/api/send-sos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lat: latitude, lng: longitude })
+            });
+            */
+        }
+
+        function handleLocationError(error) {
+            let cancelBtn = document.getElementById('cancelBtn');
+            let descText = document.querySelector('.sos-desc');
+            let innerBtn = document.querySelector('.sos-btn-inner');
+            
+            cancelBtn.style.display = 'none';
+            innerBtn.style.background = 'linear-gradient(135deg, #ff1744, #d50000)';
+            descText.innerHTML = "Failed to get location. Please enable GPS permissions.";
+            
+            alert("Error: Location access denied or GPS is turned off. Please enable location settings.");
+        }
+
+        function sendEmergencyAlertNow() {
+            let descText = document.querySelector('.sos-desc');
+            descText.innerHTML = "Fetching your live location...";
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendEmergencyData, handleLocationError, {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    </script>
+</body>
+</html>

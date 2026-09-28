@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contacts - Women Safety Route</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #fcf4f8; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        .navbar { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 12px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); position: sticky; top: 0; z-index: 100; }
+        .logo-section { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, #e91e63, #9c27b0); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+        .logo-text h2 { font-size: 18px; color: #d81b60; font-weight: 700; line-height: 1.2; }
+        .logo-text p { font-size: 11px; color: #888; }
+        .nav-links { display: flex; align-items: center; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: #d81b60; font-weight: 600; border-bottom: 2px solid #d81b60; padding-bottom: 4px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .bell-icon { font-size: 18px; color: #d81b60; cursor: pointer; }
+        .profile-btn { background: #d81b60; color: white; padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+        
+        .container { display: flex; flex: 1; }
+        .sidebar { width: 250px; background-color: #fdf2f7; padding: 20px 15px; display: flex; flex-direction: column; gap: 10px; border-right: 1px solid #f3e1eb; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 12px 18px; border-radius: 10px; text-decoration: none; color: #555; font-size: 13px; font-weight: 500; transition: all 0.3s; }
+        .sidebar-item.active { background: #e91e63; color: white; box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3); }
+        .sidebar-item:hover:not(.active) { background: #f8d7e6; color: #d81b60; }
+        .sidebar-item .icon-box { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; }
+        .sidebar-item:not(.active) .icon-box { background: #fce4ec; color: #d81b60; }
+        .sidebar-footer-text { margin-top: auto; padding: 20px; text-align: center; font-family: 'Caveat', cursive; font-size: 26px; color: #d81b60; transform: rotate(-8deg); }
+
+        .content { flex: 1; padding: 25px 35px; display: flex; flex-direction: column; gap: 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 20px 25px; border-radius: 16px; border: 1px solid #fce4ec; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .page-header h1 { font-size: 20px; color: #d81b60; display: flex; align-items: center; gap: 10px; }
+        .btn-add { background: #d81b60; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        
+        .contacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .contact-card { background: #fff; border-radius: 16px; padding: 20px; border: 1px solid #fce4ec; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px; }
+        .contact-top { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; background: #fce4ec; color: #d81b60; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; }
+        .contact-info h3 { font-size: 15px; color: #333; }
+        .contact-info p { font-size: 12px; color: #777; }
+        .contact-info .relation { font-size: 11px; background: #fdf0f6; color: #d81b60; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-top: 3px; }
+        .contact-actions { display: flex; gap: 10px; border-top: 1px solid #f8f0f4; padding-top: 12px; }
+        .btn-call { flex: 1; background: #25d366; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; }
+        .btn-delete { background: #fff1f0; color: #f5222d; border: 1px solid #ffa39e; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #fff; padding: 30px; border-radius: 16px; width: 350px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .modal-content h3 { color: #d81b60; font-size: 18px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 12px; color: #555; font-weight: 500; }
+        .form-group input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; outline: none; }
+        .form-group input:focus { border-color: #d81b60; }
+        .modal-actions { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-save { flex: 1; background: #d81b60; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-close { background: #f5f5f5; color: #666; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; }
+
+        @media (max-width: 1024px) { .contacts-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } .contacts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="logo-text"><h2>Women Safety Route</h2><p>Empowering Her Journey, Ensuring Her Safety.</p></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="safe-places.html">Safe Places</a></li>
+            <li><a href="sos.html">Emergency</a></li>
+            <li><a href="contacts.html" class="active">Contacts</a></li>
+            <li><a href="locker.html">Evidence Locker</a></li>
+            
+        </ul>
+        <div class="nav-right">
+            <div class="bell-icon"><i class="fa-regular fa-bell"></i></div>
+            <div class="profile-btn"><i class="fa-solid fa-user"></i><span>My Profile</span></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-border-all"></i></div>
+                <span>Dashboard</span></a>
+            <a href="sos.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <span>Emergency SOS</span></a>
+            <a href="contacts.html" class="sidebar-item active">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <span>Emergency Contacts</span></a>
+            <a href="safe-places.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-shield-halved"></i>
+                </div><span>Safe Places</span></a>
+            <a href="locker.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <span>Evidence Locker</span></a>
+            <a href="location.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                <span>Live Location</span></a>
+            <a href="safe-route.html" class="sidebar-item">
+                <div class="icon-box"><i class="fa-solid fa-route"></i></div>
+        <span>Safe-route</span>
+    </a>
+            <a href="profile.html" class="sidebar-item"><div class="icon-box"><i class="fa-solid fa-user"></i></div><span>My Safety Profile</span></a>
+            <div class="sidebar-footer-text">You are<br>Not Alone ♡</div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <div>
+                    <h1><i class="fa-solid fa-address-book"></i> Emergency Contacts</h1>
+                    <p style="font-size: 12px; color: #666; margin-top: 4px;">These contacts will automatically receive your SOS alerts and live location.</p>
+                </div>
+                <button class="btn-add" onclick="openModal()"><i class="fa-solid fa-plus"></i> Add Contact</button>
+            </div>
+
+            <div class="contacts-grid" id="contactsGrid">
+                <!-- Dynamic Contacts will load here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h3>Add New Contact</h3>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="newName" placeholder="e.g. Brother">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="newPhone" placeholder="e.g. +92 300 1234567">
+            </div>
+            <div class="form-group">
+                <label>Relation / Tag</label>
+                <input type="text" id="newRelation" placeholder="e.g. Family">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="saveContact()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", renderContacts);
+
+        function getStoredContacts() {
+            let data = localStorage.getItem('userEmergencyContacts');
+            return data ? JSON.parse(data) : [
+                { name: "Mom", phone: "+923001234567", relation: "Primary Contact" },
+                { name: "Sister", phone: "+923019876543", relation: "Family" }
+            ];
+        }
+
+        function renderContacts() {
+            let contacts = getStoredContacts();
+            let grid = document.getElementById('contactsGrid');
+            grid.innerHTML = "";
+
+            if(contacts.length === 0) {
+                grid.innerHTML = `<p style="font-size: 13px; color: #777;">No emergency contacts added yet.</p>`;
+                return;
+            }
+
+            contacts.forEach((c, index) => {
+                let firstLetter = c.name.charAt(0).toUpperCase();
+                grid.innerHTML += `
+                    <div class="contact-card">
+                        <div class="contact-top">
+                            <div class="avatar">${firstLetter}</div>
+                            <div class="contact-info">
+                                <h3>${c.name}</h3>
+                                <p>${c.phone}</p>
+                                <span class="relation">${c.relation}</span>
+                            </div>
+                        </div>
+                        <div class="contact-actions">
+                            <a href="tel:${c.phone}" class="btn-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+                            <button class="btn-delete" onclick="deleteContact(${index})"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
+
+        function saveContact() {
+            let name = document.getElementById('newName').value.trim();
+            let phone = document.getElementById('newPhone').value.trim();
+            let relation = document.getElementById('newRelation').value.trim() || "Trusted";
+
+            if(!name || !phone) {
+                alert("Please enter both name and phone number.");
+                return;
+            }
+
+            let contacts = getStoredContacts();
+            contacts.push({ name, phone, relation });
+            localStorage.setItem('userEmergencyContacts', JSON.stringify(contacts));
+
+            document.getElementById('newName').value = '';
+            document.getElementById('newPhone').value = '';
+            document.getElementById('newRelation').value = '';
+
+            closeModal();
+            renderContacts();
+        }
+
+        function deleteContact(index) {
+            let contacts = getStoredContacts();
+            contacts.splice(index, 1);
+            localStorage.setItem('userEmergencyContacts', JSON.stringify(contacts));
+            renderContacts();
+        }
+    </script>
+</body>
+</html>
